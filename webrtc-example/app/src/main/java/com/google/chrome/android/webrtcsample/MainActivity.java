@@ -1,31 +1,25 @@
 package com.google.chrome.android.webrtcsample;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.webkit.CookieManager;
+import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.PermissionRequest;
 import android.webkit.WebViewClient;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class MainActivity extends Activity
@@ -139,7 +133,7 @@ public class MainActivity extends Activity
 
             setUpWebViewDefaults(mWebRTCWebView);
 
-            mWebRTCWebView.loadUrl("https://apprtc-m.appspot.com/");
+            mWebRTCWebView.loadUrl("https://apprtc.appspot.com/");
 
             mWebRTCWebView.setWebChromeClient(new WebChromeClient() {
 
@@ -147,10 +141,10 @@ public class MainActivity extends Activity
                 public void onPermissionRequest(final PermissionRequest request) {
                     Log.d(TAG, "onPermissionRequest");
                     getActivity().runOnUiThread(new Runnable() {
-                        @TargetApi(Build.VERSION_CODES.L)
+                        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         public void run() {
-                            if(request.getOrigin().toString().equals("https://apprtc-m.appspot.com/")) {
+                            if(request.getOrigin().toString().equals("https://apprtc.appspot.com/")) {
                                 request.grant(request.getResources());
                             } else {
                                 request.deny();
@@ -188,7 +182,7 @@ public class MainActivity extends Activity
          *
          * @param webView
          */
-        @TargetApi(Build.VERSION_CODES.L)
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         private void setUpWebViewDefaults(WebView webView) {
             WebSettings settings = webView.getSettings();
 
